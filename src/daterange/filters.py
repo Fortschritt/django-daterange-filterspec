@@ -30,7 +30,7 @@ class FormFilter(FieldListFilter):
 
     def get_form_kwargs(self, request):
         return {
-            "prefix": self.field.name,
+            "prefix": self.field_path,
             "initial": self.get_initial(),
             "data": request.GET or None,
         }
@@ -55,7 +55,7 @@ class DateRangeFilter(FormFilter):
     form_class = DateRangeForm
 
     def form_lookups(self):
-        name = self.field.name
+        name = self.field_path
         return (
             ("%s-start" % name, "%s__gte" % name),
             ("%s-until" % name, "%s__lt" % name),
