@@ -12,6 +12,11 @@
       {{ hidden_field }}
     {% endfor %}
 
+	{#create hidden inputs to preserve values from other filters and search field#}
+	{% for k, v in spec.other_parameters.items %}
+		<input type="hidden" name="{{ k }}" value="{{ v }}">
+    {% endfor %}
+
     {% for field in spec.form.visible_fields %}
       <div class="field{% if field.errors %} error{% endif %}">
           <div>{{ field.label_tag }}</div>

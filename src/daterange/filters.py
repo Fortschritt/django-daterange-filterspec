@@ -12,8 +12,8 @@ class FormFilter(FieldListFilter):
     def __init__(self, field, request, params, model, model_admin, field_path):
         super().__init__(field, request, params, model, model_admin, field_path)
         expected = self.expected_parameters()
-        others = {k: v for k, v in request.GET.items() if k not in expected}
-        self.other_query_string = urllib.parse.urlencode(others)
+        self.other_parameters = {k: v for k, v in request.GET.items() if k not in expected}
+        self.other_query_string = urllib.parse.urlencode(self.other_parameters)
         self.form = self.get_form(request)
         self.form.is_valid()
 
